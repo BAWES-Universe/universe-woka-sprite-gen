@@ -83,3 +83,30 @@ vs ~620).
 No character in this repo is approved for the game yet. Every committed
 `spec.json` carries `"approval": "draft"` until a human signs off on the texture
 in game next to a default woka.
+
+## 2026-09-13 · Base-image experiments (automated path, not yet at the bar)
+
+Root cause identified for the mushy faces: our prompts said "32×32 pixel art"
+but the model returned a ~130-pixel-tall drawing, so the face was averaged away
+during the reduction to 32px. Fixes attempted, judged at the true 32px cell
+against pipoya:
+
+| attempt | approach | result |
+|---------|----------|--------|
+| A | explicit "32×32 sprite shown 16× with each art pixel as a hard 16×16 block", per-feature pixel budget for the face | clean and structurally correct — fills the cell, agal band reads, sandals read. Still sparse: no eye whites (eyes are dark 2px marks), the thobe is one flat mass, little internal shading. |
+| B | style reference = the full pipoya **spritesheet** (96×128) | **fail.** The model mashed several frames' poses together and left magenta specks. Do not use a multi-frame sheet as a style reference. |
+| C | style reference = a **single** pipoya frame, upscaled 8×, plus a request for equal face detail | busier than A but messy: the head-dress came out as a dense white pattern (noise at 32px), the eyes are mushy, magenta specks remain near the hands. |
+
+Conclusions:
+
+1. Feeding a style reference can help proportions but the model imports surface
+   texture as noise at 32px. If using `--ref`, use a **single frame**, and say
+   explicitly "no pattern on the head-dress, flat areas only".
+2. Neither automated candidate matches pipoya's faces. pipoya's faces work
+   because 1px eye whites plus a 1px dark pupil are *placed*, not generated.
+3. The base is the bottleneck, and hand-driven generation has produced better
+   bases than the automated prompt path (reported by the project owner). The
+   manual base route in `making-the-base.md` is therefore the recommended path
+   until a candidate passes review.
+
+No base has been approved yet; the pipeline has not been run for these candidates.
