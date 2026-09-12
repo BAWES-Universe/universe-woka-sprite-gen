@@ -13,3 +13,8 @@ venv/
 # os
 .DS_Store
 Thumbs.db
+
+# Local review material can embed restricted third-party reference pixels.
+local-review/
+local-builds/
+*.approval.json

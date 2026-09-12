@@ -30,7 +30,32 @@ Full detail and the tolerances we enforce: [docs/wa-texture-contract.md](docs/wa
 
 ---
 
-## Quickstart
+## Pixel-native prototype: preserve deliberate 32px art
+
+The alternative compiler now accepts **original indexed parts at 32px** and
+composes the twelve frames deterministically. It preserves actual eye pixels,
+material tones and head registration. No GPU, model or sprite-gen dependency is
+needed for this route. A human still approves the base and final texture.
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+bash tests/selftest.sh
+python3 pipeline/pixel_native.py anchors \
+  --rig examples/pixel-native/desert_guide.rig.json --out /tmp/woka-anchors.png
+```
+
+The example is **unapproved engineering art**, not proof that we beat PIPOYA.
+The measured front frame is 32px high, 27px wide and 717 ink pixels; quality stays
+`NOT_ESTABLISHED` until blind human review. See:
+
+- [Design, five approaches, budgets and two-day/two-week plans](docs/pixel-native-design.md)
+- [Production runbook and two human approval gates](docs/pixel-native-runbook.md)
+- [Metrics, worked comparison and blind A/B protocol](docs/pixel-native-evaluation.md)
+- [PIPOYA licensing and training boundary](docs/pixel-native-licensing.md)
+
+## Legacy generation quickstart
 
 ```bash
 git clone https://github.com/BAWES-Universe/universe-woka-sprite-gen

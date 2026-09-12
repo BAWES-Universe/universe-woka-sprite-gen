@@ -33,3 +33,16 @@ visual and measurable reference (`pipeline/compare_wa.py`, `docs/style-guide.md`
 
 They are deliberately **not** copied into this repository. Do not commit them
 here.
+
+## Original native parts and evaluation rights
+
+The program-authored indexed example under `examples/pixel-native/` is original
+engineering source under this repo's MIT license, not production-approved art.
+No PIPOYA image pixels, training data or weights are included. Numeric comparison
+results include reference hashes for local reproducibility.
+
+PIPOYA's specific pack and general-site redistribution terms differ; neither
+establishes training/output/checkpoint permission for this project. See
+[the rights decision](docs/pixel-native-licensing.md). Do not commit generated
+comparison pages: they embed reference pixels. Pillow is consumed as a pip
+dependency, pinned in `requirements.txt`, not vendored.
