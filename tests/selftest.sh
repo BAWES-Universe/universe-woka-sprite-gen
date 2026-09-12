@@ -109,20 +109,31 @@ grep -q 'set -euo pipefail' "$TMP/repo/pipeline/character_pipeline.sh" && ok "st
 say "2. CI workflow parses and points at the gate"
 python3 - "$TMP/repo/.github/workflows/verify.yml" <<'PY'
 import sys
+body = open(sys.argv[1]).read()
+
+# String check always; parse the YAML too when we can, so a reworded or
+# restructured workflow is caught rather than silently accepted.
+need = ["pull_request", "tests/selftest.sh", "pipeline/verify_wa.py",
+        "characters/*/out/*.png"]
+missing = [n for n in need if n not in body]
+if missing:
+    print(f"  FAIL workflow missing {missing}")
+    sys.exit(1)
+
 try:
     import yaml
 except ImportError:
-    print("  skip  pyyaml not installed; structural check only")
-    body = open(sys.argv[1]).read()
-    need = ["on:", "pull_request", "pipeline/verify_wa.py", "characters/*/out/*.png"]
-    missing = [n for n in need if n not in body]
-    print("  ok    workflow references the gate" if not missing else f"  FAIL missing {missing}")
-    sys.exit(0 if not missing else 1)
-d = yaml.safe_load(open(sys.argv[1]))
-run = d["jobs"]["verify"]["steps"][-1]["run"]
-assert "pipeline/verify_wa.py" in run, run
-assert "characters/*/out/*.png" in run, run
-print("  ok   workflow runs pipeline/verify_wa.py over characters/*/out/*.png")
+    print("  ok   workflow references both gates (pyyaml absent, string check only)")
+    sys.exit(0)
+
+d = yaml.safe_load(body)
+runs = [s.get("run", "") for job in d["jobs"].values() for s in job["steps"]]
+for want, label in [("selftest.sh", "pipeline self-test"),
+                    ("verify_wa.py", "texture gate")]:
+    if not any(want in r for r in runs):
+        print(f"  FAIL no CI step runs the {label}")
+        sys.exit(1)
+print(f"  ok   CI runs both gates across {len(d['jobs'])} jobs")
 PY
 [ $? -eq 0 ] || bad "workflow check"
 
