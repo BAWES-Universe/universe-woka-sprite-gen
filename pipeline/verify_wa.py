@@ -5,12 +5,12 @@
 
 Checks, per texture:
   format   96x128 RGBA, 4 rows x 3 columns of 32x32
-  usage    character >=30px tall in every row (fills the cell like the game's sprites)
+  usage    character >=30px tall in all twelve cells (fills the cell like the game's sprites)
   alpha    1-bit — no semi-transparent pixels (they render as haze at 32px)
   palette  <=32 colours
   previews if sibling walk_<dir>.gif / idle_<dir>.png exist, they must be the
            shipped texture's pixels: GIF frames in the engine's [0,1,2,1] order,
-           idle stills equal to column 1
+           idle stills equal to column 1, GIF frames 100ms and loop forever
 
 Exits non-zero if anything fails, so CI can gate on it.
 """
@@ -43,6 +43,8 @@ def check(texture: Path) -> list[str]:
     im = Image.open(texture)
     if im.format != "PNG":
         fails.append(f"not a PNG ({im.format})")
+    if im.mode != "RGBA":
+        fails.append(f"mode is {im.mode}, must be RGBA")
     im = im.convert("RGBA")
     if im.size != (96, 128):
         fails.append(f"size is {im.size}, must be (96, 128)")
@@ -68,9 +70,19 @@ def check(texture: Path) -> list[str]:
             fails.append(f"row {i} ({d}) character is {h}px tall "
                          f"(min {MIN_HEIGHT} — it will look tiny in game)")
 
+        for column in (0, 2):
+            step = im.crop((column * 32, i * 32, column * 32 + 32, i * 32 + 32))
+            step_bb = step.getchannel("A").getbbox()
+            if not step_bb or step_bb[3] - step_bb[1] < MIN_HEIGHT:
+                fails.append(f"row {i} ({d}) column {column} is empty or shorter than {MIN_HEIGHT}px")
+
         gif = texture.parent / f"walk_{d}.gif"
         if gif.exists():
-            got = [f.convert("RGBA") for f in ImageSequence.Iterator(Image.open(gif))]
+            with Image.open(gif) as animation:
+                timings = [f.info.get("duration") for f in ImageSequence.Iterator(animation)]
+                if timings != [100] * 4 or animation.info.get("loop") != 0:
+                    fails.append(f"walk_{d}.gif must loop at 10fps (100ms per frame)")
+                got = [f.convert("RGBA") for f in ImageSequence.Iterator(animation)]
             exp = [im.crop((c * 32, i * 32, (c + 1) * 32, (i + 1) * 32)) for c in WALK_SEQ]
             # previews are upscaled; compare at the preview's scale
             if got and got[0].size != exp[0].size:
@@ -106,10 +118,13 @@ def main(argv: list[str]) -> int:
             print(f"FAIL {arg}: not found")
             ok = False
             continue
-        if not is_texture(p):
+        if not is_texture(p) and (p.name.startswith("idle_") or p.stem.endswith("_sheet_8x") or p.name == "sheet_8x.png"):
             print(f"SKIP {p} (not a 96x128 woka texture — previews are checked via their texture)")
             continue
-        fails = check(p)
+        try:
+            fails = check(p)
+        except (OSError, ValueError) as exc:
+            fails = [f"unreadable texture: {exc}"]
         if fails:
             ok = False
             print(f"FAIL {p}")
