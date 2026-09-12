@@ -226,6 +226,13 @@ def main() -> None:
             fs = [f.transpose(Image.FLIP_LEFT_RIGHT) for f in fs]
         if len(fs) != COLS:
             sys.exit(f"{direction}/walk: expected {COLS} frames, got {len(fs)}")
+        # A row of identical poses is a generation failure, not an animation. It
+        # also collapses the GIF (PIL merges identical consecutive frames), which
+        # verify_wa.py then rejects. Say so here, where the cause is obvious.
+        dupes = [i for i in range(1, len(fs)) if fs[i].tobytes() == fs[i - 1].tobytes()]
+        if dupes:
+            print(f"  WARNING {direction}/walk: frame(s) {dupes} identical to the previous — "
+                  f"this row does not animate; regenerate it (-force)", file=sys.stderr)
         for c, f in enumerate(fs):
             sheet.paste(f, (c * args.cell, r * args.cell))
 

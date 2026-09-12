@@ -1,9 +1,10 @@
 name: verify textures
 
-# The gate: every committed texture must be a valid WorkAdventure woka texture.
-# It exists because two real defects shipped past a human eyeball once already:
-# a sprite that left two thirds of every cell empty (looked tiny in game), and
-# GIF previews that were not the pixels of the shipped sheet.
+# Two gates. `selftest` exercises the pipeline itself (with a stub generator, so
+# it needs no credentials and no network). `textures` checks every committed
+# texture. They exist because two real defects got past a human eyeball once
+# already: a sprite that left two thirds of every cell empty (looked tiny in
+# game), and preview GIFs that were not the shipped pixels.
 
 on:
   push:
@@ -11,7 +12,17 @@ on:
   pull_request:
 
 jobs:
-  verify:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet pillow
+      - run: bash tests/selftest.sh
+
+  textures:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,5 +31,4 @@ jobs:
           python-version: "3.11"
       - run: pip install --quiet pillow
       - name: Verify every committed texture
-        run: |
-          python3 pipeline/verify_wa.py characters/*/out/*.png
+        run: python3 pipeline/verify_wa.py characters/*/out/*.png

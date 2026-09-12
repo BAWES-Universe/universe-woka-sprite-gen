@@ -56,6 +56,7 @@ Output lands in `characters/<name>/out/`:
 Verify before you push:
 
 ```bash
+bash tests/selftest.sh                       # pipeline self-test, no credentials needed
 python3 pipeline/verify_wa.py characters/*/out/*.png
 ```
 
@@ -77,6 +78,7 @@ docs/
   tools-and-versions.md   pinned tool versions, prerequisites, how to bump the pin
 characters/
   <name>/                 spec.json, prompt.txt, base.png, out/, report/
+tests/selftest.sh         pipeline self-test (stub generator, no credentials needed)
 .github/workflows/verify.yml
 ```
 
