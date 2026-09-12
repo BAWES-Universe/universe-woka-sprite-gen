@@ -1,0 +1,15 @@
+# generation runs (large, stochastic intermediates — the shipped artifacts are the record)
+runs/
+*.sg-rwlock
+*_32/
+run*/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# os
+.DS_Store
+Thumbs.db

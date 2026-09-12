@@ -1,0 +1,58 @@
+{
+  "description": "chibi Arab woman, deep rose hijab over hair and shoulders, long navy abaya, olive skin",
+  "approval": "draft",
+  "layout": "taxonomy/v1",
+  "directions": {
+    "set": [
+      "down",
+      "side",
+      "up"
+    ],
+    "mirror": {
+      "left": "side"
+    },
+    "anchor_suffix": "idle"
+  },
+  "cell": {
+    "width": 256,
+    "height": 256
+  },
+  "states": {
+    "down_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle, facing the viewer (front view); feet planted together; this row is the down direction anchor"
+    },
+    "side_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle, pure side profile view facing camera-right; feet planted together; this row is the side direction anchor"
+    },
+    "up_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle, facing away from the viewer (back view, no visible face); feet planted together; this row is the up direction anchor"
+    },
+    "down_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle, facing the viewer (front view): frame one left foot forward, frame two a neutral standing pose with feet together, frame three right foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "side_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle, pure side profile view facing camera-right: frame one left foot forward, frame two a neutral standing pose with feet together, frame three right foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "up_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle, facing away from the viewer (back view, no visible face): frame one left foot forward, frame two a neutral standing pose with feet together, frame three right foot forward; arms swing in opposition; feet stay on the ground line"
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "arab_female",
+    "description": "chibi Arab woman, deep rose hijab over hair and shoulders, long navy abaya, olive skin, PIPOYA proportions and outlines",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 32,
+    "height": 32,
+    "safe_margin_x": 0,
+    "safe_margin_y": 0,
+    "size": 32,
+    "safe_margin": 0
+  },
+  "chroma_key": {
+    "name": "cyan",
+    "hex": "#00FFFF",
+    "rgb": [
+      0,
+      255,
+      255
+    ],
+    "selection": "auto",
+    "score": 264.44,
+    "min_subject_distance": 215.62,
+    "background": {
+      "mode": "flat",
+      "hex": "#FA04FA",
+      "rgb": [
+        250,
+        4,
+        250
+      ],
+      "opaque_border_fraction": 1.0,
+      "border_coverage": 0.922,
+      "enclosed_background_pixels": 37,
+      "enclosed_material_pixels": 0,
+      "subject_pixels": 22373
+    },
+    "candidates": [
+      {
+        "name": "magenta",
+        "hex": "#FF00FF",
+        "score": 176.8,
+        "min_subject_distance": 165.35,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "green",
+        "hex": "#00FF00",
+        "score": 220.41,
+        "min_subject_distance": 214.48,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "cyan",
+        "hex": "#00FFFF",
+        "score": 264.44,
+        "min_subject_distance": 215.62,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "blue",
+        "hex": "#004DFF",
+        "score": 174.25,
+        "min_subject_distance": 163.39,
+        "clears_erase_radius": true
+      }
+    ],
+    "selection_reason": "highest 1st-percentile subject distance among the 4 candidate(s) clearing the 96 erase radius"
+  },
+  "states": {
+    "down_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle, facing the viewer (front view); feet planted together; this row is the down direction anchor"
+    },
+    "side_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle, pure side profile view facing camera-right; feet planted together; this row is the side direction anchor"
+    },
+    "up_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle, facing away from the viewer (back view, no visible face); feet planted together; this row is the up direction anchor"
+    },
+    "down_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle, facing the viewer (front view): frame one left foot forward, frame two a neutral standing pose with feet together, frame three right foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "side_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle, pure side profile view facing camera-right: frame one left foot forward, frame two a neutral standing pose with feet together, frame three right foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "up_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle, facing away from the viewer (back view, no visible face): frame one left foot forward, frame two a neutral standing pose with feet together, frame three right foot forward; arms swing in opposition; feet stay on the ground line"
+    }
+  },
+  "style": "match the attached base/anchor reference image EXACTLY: same pixel density (logical pixel block size), same body proportions, same outline weight, same palette, same shading style, same level of detail. Do not restyle, do not change proportions, do not add or remove detail density.",
+  "directions": {
+    "set": [
+      "down",
+      "side",
+      "up"
+    ],
+    "mirror": {
+      "left": "side"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "fit": {
+    "resample": "kcentroid",
+    "align_x": "foot-centroid",
+    "align_y": "bottom"
+  }
+}

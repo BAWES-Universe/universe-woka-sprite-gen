@@ -1,0 +1,58 @@
+{
+  "description": "chibi knight, silver armor with red tabard, small round red shield",
+  "approval": "draft",
+  "layout": "taxonomy/v1",
+  "directions": {
+    "set": [
+      "down",
+      "side",
+      "up"
+    ],
+    "mirror": {
+      "left": "side"
+    },
+    "anchor_suffix": "idle"
+  },
+  "cell": {
+    "width": 256,
+    "height": 256
+  },
+  "states": {
+    "down_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle facing the viewer, feet planted, subtle breathing and one blink; this row is the front direction anchor"
+    },
+    "down_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle facing the viewer: left foot forward, mid stance, right foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "side_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle in pure side profile facing camera-right, feet planted, subtle breathing; this row is the side direction anchor"
+    },
+    "side_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle in pure side profile facing camera-right: front foot forward, mid stance, back foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "up_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle seen from behind, back of head and shoulders, no visible face, subtle breathing; this row is the back direction anchor"
+    },
+    "up_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle seen from behind: left foot forward, mid stance, right foot forward; arms swing in opposition; no visible face"
+    }
+  }
+}

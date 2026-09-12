@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "knight01",
+    "description": "chibi knight, silver armor, red tabard with white cross, round red shield, 16-bit pixel art",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 32,
+    "height": 32,
+    "safe_margin_x": 0,
+    "safe_margin_y": 0,
+    "size": 32,
+    "safe_margin": 0
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "auto",
+    "score": 206.59,
+    "min_subject_distance": 202.5,
+    "background": {
+      "mode": "flat",
+      "hex": "#FA04FB",
+      "rgb": [
+        250,
+        4,
+        251
+      ],
+      "opaque_border_fraction": 1.0,
+      "border_coverage": 1.0,
+      "enclosed_background_pixels": 90,
+      "enclosed_material_pixels": 4,
+      "subject_pixels": 11380
+    },
+    "candidates": [
+      {
+        "name": "magenta",
+        "hex": "#FF00FF",
+        "score": 208.63,
+        "min_subject_distance": 15.84,
+        "clears_erase_radius": false
+      },
+      {
+        "name": "green",
+        "hex": "#00FF00",
+        "score": 206.59,
+        "min_subject_distance": 202.5,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "cyan",
+        "hex": "#00FFFF",
+        "score": 206.3,
+        "min_subject_distance": 187.59,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "blue",
+        "hex": "#004DFF",
+        "score": 185.63,
+        "min_subject_distance": 177.76,
+        "clears_erase_radius": true
+      }
+    ],
+    "selection_reason": "highest 1st-percentile subject distance among the 3 candidate(s) clearing the 96 erase radius"
+  },
+  "states": {
+    "down_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle facing the viewer, feet planted, subtle breathing and one blink; this row is the front direction anchor"
+    },
+    "down_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle facing the viewer: left foot forward, mid stance, right foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "side_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle in pure side profile facing camera-right, feet planted, subtle breathing; this row is the side direction anchor"
+    },
+    "side_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle in pure side profile facing camera-right: front foot forward, mid stance, back foot forward; arms swing in opposition; feet stay on the ground line"
+    },
+    "up_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "standing idle seen from behind, back of head and shoulders, no visible face, subtle breathing; this row is the back direction anchor"
+    },
+    "up_walk": {
+      "frames": 3,
+      "fps": 10,
+      "loop": true,
+      "action": "walk cycle seen from behind: left foot forward, mid stance, right foot forward; arms swing in opposition; no visible face"
+    }
+  },
+  "style": "match the attached base/anchor reference image EXACTLY: same pixel density (logical pixel block size), same body proportions, same outline weight, same palette, same shading style, same level of detail. Do not restyle, do not change proportions, do not add or remove detail density.",
+  "directions": {
+    "set": [
+      "down",
+      "side",
+      "up"
+    ],
+    "mirror": {
+      "left": "side"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "fit": {
+    "resample": "kcentroid",
+    "align_x": "foot-centroid",
+    "align_y": "bottom"
+  }
+}
