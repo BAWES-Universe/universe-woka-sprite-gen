@@ -1,0 +1,2 @@
+# Validated compiler/export environment; no GPU or model dependency.
+Pillow==12.3.0

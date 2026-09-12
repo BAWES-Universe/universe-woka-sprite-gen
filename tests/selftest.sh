@@ -222,6 +222,9 @@ say "9. the real repo's committed textures still pass"
 ( cd "$REPO" && python3 pipeline/verify_wa.py characters/*/out/*.png ) >"$TMP/real.log" 2>&1
 grep -q 'ALL PASS' "$TMP/real.log" && ok "3 committed textures pass" || { bad "committed textures fail"; tail -5 "$TMP/real.log"; }
 
+say "10. pixel-native compiler, approvals, quality gates and blind review"
+(cd "$REPO" && PYTHONWARNINGS=ignore::DeprecationWarning python3 -m unittest discover -s tests -p 'test_pixel_native.py') && ok "pixel-native tests" || bad "pixel-native tests"
+
 say ""
 [ $fail -eq 0 ] && say "AD-HOC VERIFICATION: all checks passed" || say "AD-HOC VERIFICATION: failures above"
 exit $fail
