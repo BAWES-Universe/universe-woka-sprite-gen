@@ -1,0 +1,899 @@
+{
+  "schema": "woka-parts/v1",
+  "name": "desert_guide",
+  "provenance": {
+    "author": "OpenAI Codex procedural source-matrix prototype for BAWES",
+    "license": "MIT",
+    "note": "Original indexed parts authored for this prototype; no PIPOYA pixels, tracing or training. Engineering fixture, not art-approved."
+  },
+  "palette": {
+    "o": "#262331",
+    "a": "#484354",
+    "b": "#766674",
+    "s": "#a65e43",
+    "t": "#d08b5b",
+    "u": "#edb979",
+    "v": "#ffdb9d",
+    "w": "#f8f3db",
+    "c": "#c7d8d5",
+    "d": "#94b4b5",
+    "e": "#648a94",
+    "f": "#386577",
+    "g": "#214958",
+    "h": "#173341",
+    "i": "#e5bf68",
+    "j": "#b08044",
+    "k": "#79553c",
+    "l": "#4d3840",
+    "p": "#101823"
+  },
+  "parts": {
+    "front_head": [
+      "......oooooooooooo.......",
+      "....oocccccwwwwwcccoo....",
+      "...occcwwwwwwwwwccccco...",
+      "..occwwwwwwwwwwwcccccco..",
+      ".ocwwwwwwwwwwwwccccccdo..",
+      "occcoooooooooooooooocddo.",
+      "odccoottttttttttttoocddo.",
+      "odcossuuuuuuuuuuuusocddo.",
+      "odcostpputtuttppuuusocdo.",
+      "odcostwpvttuttpwvuuocddo.",
+      "odcostuuuttutttuuuuocddo.",
+      "odcostuuuutttuuuuusocddo.",
+      "odcossuuutkktuuuussocddo.",
+      "odccoosssuuuuussssocdddo.",
+      ".odcccoosssssssoocddddo..",
+      "..odccccoooooocccccddo..."
+    ],
+    "back_head": [
+      "......oooooooooooo.......",
+      "....oocccccwwwwwcccoo....",
+      "...occcwwwwwwwwwccccco...",
+      "..occwwwwwwwwwwwcccccco..",
+      ".ocwwwwwwwwwwwwccccccdo..",
+      "occcoooooooooooooooocddo.",
+      "odccccwwwwwwwccccccccddo.",
+      "odccccwwwwwwcccccccccddo.",
+      "odccccwwwwwccccccccccddo.",
+      "odccccwwwwwccccdccccdddo.",
+      "odccccwwwwcccccdccccdddo.",
+      "odccccwwwccccccdccccdddo.",
+      "odccccwwccccccddcccddddo.",
+      "odccccwcccccccddcccddddo.",
+      ".odcccccccccccddccddddo..",
+      "..odccccccccccddccdddo..."
+    ],
+    "right_head": [
+      ".....oooooooo.....",
+      "...oocccwwwwcoo...",
+      "..occcwwwwwwccco..",
+      ".occcwwwwwwwcccco.",
+      "occccwwwwwwwccccdo",
+      "odccooooooooooooco",
+      "odccccostttttttooo",
+      "odccccostuuuuuuuo.",
+      "odccccostuuppuuuo.",
+      "odccccostuutpwuuto",
+      "odccccostuuuuuuuto",
+      "odccccostuuutuuuo.",
+      "odccccostuukkuuso.",
+      "odccccossuuuussso.",
+      ".odccccossssssoo..",
+      "..odccccoooooo...."
+    ],
+    "robe": [
+      "....oooooooooo....",
+      "..oocwwwwwwwccoo..",
+      ".ocwwwwcwcwwwwcco.",
+      "ocwwwwwcwcwwwwccdo",
+      "ocwwwwwckcwwwwccdo",
+      "ocwwwwwcwcwwwwccdo",
+      "ocwwwwwcwcwwwwccdo",
+      "ocwwwwwckcwwwwccdo",
+      "ocwwwwwcwcwwwwccdo",
+      "ocwwwwwcccwwwwccdo",
+      "ocwwwwwcccwwwwccdo",
+      "ocwwwwccccwwwwccdo",
+      "ocwwwwccdcwwwwccdo",
+      "ocwwwcccdcwwwcccdo",
+      "oooooooooooooooooo"
+    ],
+    "back_robe": [
+      "....oooooooooo....",
+      "..oocwwwwwwwccoo..",
+      ".ocwwwwwwwwwwwcco.",
+      "ocwwwwwwwwwwwwccdo",
+      "ocwwwwwwwwwwwwccdo",
+      "ocwwwwwwwwwwwwccdo",
+      "ocwwwwwcccwwwwccdo",
+      "ocwwwwwcccwwwwccdo",
+      "ocwwwwwcdcwwwwccdo",
+      "ocwwwwwcdcwwwwccdo",
+      "ocwwwwwcdcwwwwccdo",
+      "ocwwwwccdcwwwwccdo",
+      "ocwwwwccdcwwwwccdo",
+      "ocwwwcccdcwwwcccdo",
+      "oooooooooooooooooo"
+    ],
+    "right_robe": [
+      "...oooooooooo...",
+      "..ocwwwwwwccco..",
+      ".ocwwwwwwwcccdo.",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwwccccdo",
+      "ocwwwwwwwccccddo",
+      "ocwwwwwccccddddo",
+      "oooooooooooooooo"
+    ],
+    "sleeve": [
+      "..ooo.",
+      "..ocwo",
+      "ocwwo.",
+      "ocwco.",
+      "ocwco.",
+      "ocwco.",
+      "occco.",
+      "odddo.",
+      "ottto.",
+      "otuto.",
+      "ossto.",
+      ".ooo.."
+    ],
+    "shoe": [
+      ".ooooo.",
+      "okjjkko",
+      "olkkllo"
+    ],
+    "left_head": [
+      ".....oooooooo.....",
+      "...oocwwwwcccoo...",
+      "..occcwwwwwwccco..",
+      ".occccwwwwwwwccco.",
+      "odccccwwwwwwwcccco",
+      "ocooooooooooooccdo",
+      "oootttttttsoccccdo",
+      ".ouuuuuuutsoccccdo",
+      ".ouuuppuutsoccccdo",
+      "otuuwptuutsoccccdo",
+      "otuuuuuuutsoccccdo",
+      ".ouuutuuutsoccccdo",
+      ".osuukkuutsoccccdo",
+      ".osssuuuussoccccdo",
+      "..oossssssoccccdo.",
+      "....ooooooccccdo.."
+    ],
+    "left_robe": [
+      "...oooooooooo...",
+      "..occcwwwwwwco..",
+      ".odcccwwwwwwwco.",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "odccccwwwwwwwwco",
+      "oddccccwwwwwwwco",
+      "oddddccccwwwwwco",
+      "oooooooooooooooo"
+    ],
+    "left_sleeve": [
+      ".ooo..",
+      "owco..",
+      ".owwco",
+      ".ocwco",
+      ".ocwco",
+      ".ocwco",
+      ".occco",
+      ".odddo",
+      ".ottto",
+      ".otuto",
+      ".otsso",
+      "..ooo."
+    ]
+  },
+  "views": {
+    "down": {
+      "layers": [
+        {
+          "id": "foot_l",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              8,
+              28
+            ],
+            [
+              8,
+              29
+            ],
+            [
+              8,
+              29
+            ]
+          ]
+        },
+        {
+          "id": "foot_r",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "id": "torso",
+          "part": "robe",
+          "role": "body",
+          "poses": [
+            [
+              7,
+              14
+            ],
+            [
+              7,
+              14
+            ],
+            [
+              7,
+              14
+            ]
+          ]
+        },
+        {
+          "id": "arm_l",
+          "part": "sleeve",
+          "role": "arm",
+          "poses": [
+            [
+              3,
+              15
+            ],
+            [
+              3,
+              16
+            ],
+            [
+              3,
+              17
+            ]
+          ]
+        },
+        {
+          "id": "arm_r",
+          "part": "left_sleeve",
+          "role": "arm",
+          "poses": [
+            [
+              24,
+              17
+            ],
+            [
+              24,
+              16
+            ],
+            [
+              24,
+              15
+            ]
+          ]
+        },
+        {
+          "id": "head",
+          "part": "front_head",
+          "role": "head",
+          "poses": [
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "left": {
+      "layers": [
+        {
+          "id": "foot_l",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              8,
+              28
+            ],
+            [
+              8,
+              29
+            ],
+            [
+              8,
+              29
+            ]
+          ]
+        },
+        {
+          "id": "foot_r",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "id": "torso",
+          "part": "left_robe",
+          "role": "body",
+          "poses": [
+            [
+              8,
+              14
+            ],
+            [
+              8,
+              14
+            ],
+            [
+              8,
+              14
+            ]
+          ]
+        },
+        {
+          "id": "arm_near",
+          "part": "left_sleeve",
+          "role": "arm",
+          "poses": [
+            [
+              5,
+              15
+            ],
+            [
+              5,
+              16
+            ],
+            [
+              5,
+              17
+            ]
+          ]
+        },
+        {
+          "id": "head",
+          "part": "left_head",
+          "role": "head",
+          "poses": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "right": {
+      "layers": [
+        {
+          "id": "foot_l",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              8,
+              28
+            ],
+            [
+              8,
+              29
+            ],
+            [
+              8,
+              29
+            ]
+          ]
+        },
+        {
+          "id": "foot_r",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "id": "torso",
+          "part": "right_robe",
+          "role": "body",
+          "poses": [
+            [
+              8,
+              14
+            ],
+            [
+              8,
+              14
+            ],
+            [
+              8,
+              14
+            ]
+          ]
+        },
+        {
+          "id": "arm_near",
+          "part": "sleeve",
+          "role": "arm",
+          "poses": [
+            [
+              22,
+              15
+            ],
+            [
+              22,
+              16
+            ],
+            [
+              22,
+              17
+            ]
+          ]
+        },
+        {
+          "id": "head",
+          "part": "right_head",
+          "role": "head",
+          "poses": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "up": {
+      "layers": [
+        {
+          "id": "foot_l",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              8,
+              28
+            ],
+            [
+              8,
+              29
+            ],
+            [
+              8,
+              29
+            ]
+          ]
+        },
+        {
+          "id": "foot_r",
+          "part": "shoe",
+          "role": "foot",
+          "poses": [
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              29
+            ],
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "id": "torso",
+          "part": "back_robe",
+          "role": "body",
+          "poses": [
+            [
+              7,
+              14
+            ],
+            [
+              7,
+              14
+            ],
+            [
+              7,
+              14
+            ]
+          ]
+        },
+        {
+          "id": "arm_l",
+          "part": "sleeve",
+          "role": "arm",
+          "poses": [
+            [
+              3,
+              15
+            ],
+            [
+              3,
+              16
+            ],
+            [
+              3,
+              17
+            ]
+          ]
+        },
+        {
+          "id": "arm_r",
+          "part": "left_sleeve",
+          "role": "arm",
+          "poses": [
+            [
+              24,
+              17
+            ],
+            [
+              24,
+              16
+            ],
+            [
+              24,
+              15
+            ]
+          ]
+        },
+        {
+          "id": "head",
+          "part": "back_head",
+          "role": "head",
+          "poses": [
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "review": {
+    "schema": "woka-review/v1",
+    "profile": "visible-eyes-humanoid/v1",
+    "views": {
+      "down": {
+        "head_roi": [
+          4,
+          0,
+          28,
+          14
+        ],
+        "feet_rois": [
+          [
+            0,
+            29,
+            16,
+            32
+          ],
+          [
+            16,
+            29,
+            32,
+            32
+          ]
+        ],
+        "materials": {
+          "cloth": [
+            "#94b4b5",
+            "#c7d8d5",
+            "#f8f3db"
+          ],
+          "sandals": [
+            "#79553c",
+            "#b08044",
+            "#4d3840"
+          ]
+        },
+        "face": {
+          "roi": [
+            9,
+            6,
+            24,
+            14
+          ],
+          "eyes": [
+            {
+              "white": [
+                10,
+                9
+              ],
+              "pupil": [
+                11,
+                9
+              ]
+            },
+            {
+              "white": [
+                19,
+                9
+              ],
+              "pupil": [
+                18,
+                9
+              ]
+            }
+          ],
+          "brows": [
+            [
+              11,
+              8
+            ],
+            [
+              18,
+              8
+            ]
+          ],
+          "mouth": [
+            14,
+            12
+          ],
+          "skin": [
+            12,
+            10
+          ]
+        }
+      },
+      "left": {
+        "head_roi": [
+          5,
+          0,
+          27,
+          14
+        ],
+        "feet_rois": [
+          [
+            0,
+            29,
+            16,
+            32
+          ],
+          [
+            16,
+            29,
+            32,
+            32
+          ]
+        ],
+        "materials": {
+          "cloth": [
+            "#94b4b5",
+            "#c7d8d5",
+            "#f8f3db"
+          ],
+          "sandals": [
+            "#79553c",
+            "#b08044",
+            "#4d3840"
+          ]
+        },
+        "face": {
+          "roi": [
+            7,
+            6,
+            19,
+            14
+          ],
+          "eyes": [
+            {
+              "white": [
+                11,
+                9
+              ],
+              "pupil": [
+                12,
+                9
+              ]
+            }
+          ],
+          "brows": [
+            [
+              12,
+              8
+            ]
+          ],
+          "mouth": [
+            13,
+            12
+          ],
+          "skin": [
+            13,
+            10
+          ]
+        }
+      },
+      "right": {
+        "head_roi": [
+          5,
+          0,
+          27,
+          14
+        ],
+        "feet_rois": [
+          [
+            0,
+            29,
+            16,
+            32
+          ],
+          [
+            16,
+            29,
+            32,
+            32
+          ]
+        ],
+        "materials": {
+          "cloth": [
+            "#94b4b5",
+            "#c7d8d5",
+            "#f8f3db"
+          ],
+          "sandals": [
+            "#79553c",
+            "#b08044",
+            "#4d3840"
+          ]
+        },
+        "face": {
+          "roi": [
+            13,
+            6,
+            25,
+            14
+          ],
+          "eyes": [
+            {
+              "white": [
+                20,
+                9
+              ],
+              "pupil": [
+                19,
+                9
+              ]
+            }
+          ],
+          "brows": [
+            [
+              19,
+              8
+            ]
+          ],
+          "mouth": [
+            18,
+            12
+          ],
+          "skin": [
+            18,
+            10
+          ]
+        }
+      },
+      "up": {
+        "head_roi": [
+          4,
+          0,
+          28,
+          14
+        ],
+        "feet_rois": [
+          [
+            0,
+            29,
+            16,
+            32
+          ],
+          [
+            16,
+            29,
+            32,
+            32
+          ]
+        ],
+        "materials": {
+          "cloth": [
+            "#94b4b5",
+            "#c7d8d5",
+            "#f8f3db"
+          ],
+          "sandals": [
+            "#79553c",
+            "#b08044",
+            "#4d3840"
+          ]
+        }
+      }
+    }
+  }
+}
