@@ -110,3 +110,28 @@ Conclusions:
    until a candidate passes review.
 
 No base has been approved yet; the pipeline has not been run for these candidates.
+
+## 2026-09-13 — the gate was passing things it should reject
+
+Found by running the `sprite_strategist` subagent (GPT-6 Astra, `tools/ask-astra.sh`)
+over the repository, then reproduced by hand before changing anything. Three real
+false-passes in `pipeline/verify_wa.py`:
+
+    a texture sized 48x64            -> exit 0, "ALL PASS"   (skipped, never failed)
+    a fully opaque texture           -> exit 0, "ALL PASS"   (no transparency required)
+    8 of 12 cells empty              -> exit 0, "ALL PASS"   (only column 1 was checked)
+
+All three now fail with a specific reason, `tests/test_gate.py` covers every case and
+runs in CI, and a passing run prints the numbers that actually predict quality: each
+cell's width and ink, the within-row width range, and the ink swing across a row's
+three frames.
+
+The same investigation measured us against the game's own sprites, front-standing
+frame, 300 PIPOYA sheets:
+
+    PIPOYA   ink median 576 (56.2% cell coverage), width median 24, dark-boundary 95%
+    ours     ink 271-482 (26-47% coverage),      width 13-21,    dark-boundary 74%
+
+and over all frames: within-row ink swing 13.45% for us against 3.36% for PIPOYA —
+their three walk frames stay much closer to each other than ours do. Silence on the
+gate never meant quality; it meant the gate was not asking.

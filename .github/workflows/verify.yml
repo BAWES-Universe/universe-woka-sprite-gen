@@ -23,6 +23,8 @@ jobs:
       - run: bash tests/selftest.sh
       - name: One-sheet pipeline (make_woka.py)
         run: bash tests/test_sheet_pipeline.sh
+      - name: Texture gate regression tests
+        run: python3 tests/test_gate.py
 
   textures:
     runs-on: ubuntu-latest

@@ -4,13 +4,19 @@
     python3 pipeline/verify_wa.py characters/*/out/*.png
 
 Checks, per texture:
-  format   96x128 RGBA, 4 rows x 3 columns of 32x32
-  usage    character >=30px tall in every row (fills the cell like the game's sprites)
+  format   96x128 RGBA, 4 rows x 3 columns of 32x32 — anything else FAILS
+  shape    the texture must have empty space: a fully opaque sheet is not a woka
+  content  all twelve cells must contain a figure; the standing cell must be
+           >=30px tall (the game's own wokas are 31-32)
   alpha    1-bit — no semi-transparent pixels (they render as haze at 32px)
   palette  <=32 colours
   previews if sibling walk_<dir>.gif / idle_<dir>.png exist, they must be the
            shipped texture's pixels: GIF frames in the engine's [0,1,2,1] order,
            idle stills equal to column 1
+
+On PASS it also reports the diagnostics that tell you whether the character is
+consistent and correctly sized: every cell's width and ink, the within-row width
+range, and the ink swing between a row's three frames.
 
 Exits non-zero if anything fails, so CI can gate on it.
 """
@@ -27,7 +33,12 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 ORDER = ["down", "left", "right", "up"]
 WALK_SEQ = [0, 1, 2, 1]
 MIN_HEIGHT = 30          # the game's own wokas are 31-32
+MIN_CELL_INK = 8         # a cell with less than this is empty, not a figure
 MAX_COLORS = 32
+
+# Files that live beside a texture but are not textures themselves. Anything else
+# that exists but is not 96x128 is a failure, not something to skip over.
+PREVIEW_NAME_HINTS = ("_sheet_8x", "idle_", "_cut", "sheet")
 
 
 def is_texture(p: Path) -> bool:
@@ -36,6 +47,11 @@ def is_texture(p: Path) -> bool:
         return Image.open(p).size == (96, 128)
     except Exception:
         return False
+
+
+def is_preview(p: Path) -> bool:
+    """Previews sit beside a texture and are verified through it."""
+    return any(h in p.stem for h in PREVIEW_NAME_HINTS)
 
 
 def check(texture: Path) -> list[str]:
@@ -60,7 +76,20 @@ def check(texture: Path) -> list[str]:
         fails.append("texture is fully transparent")
         return fails
 
+    # a woka needs transparent space around it; an opaque sheet is not a character
+    if not any(p[3] == 0 for p in im.getdata()):
+        fails.append("no transparent pixels at all — a woka must have empty space "
+                     "around the figure (did the background matte fail open?)")
+
     for i, d in enumerate(ORDER):
+        for c in range(3):
+            cell = im.crop((c * 32, i * 32, (c + 1) * 32, (i + 1) * 32))
+            ink = sum(1 for p in cell.getdata() if p[3] >= 128)
+            if ink < MIN_CELL_INK:
+                fails.append(f"row {i} ({d}) column {c} is empty ({ink} pixels) — "
+                             f"all twelve cells must hold a frame")
+
+        # the standing cell is column 1 and must fill the cell like the game's own
         cell = im.crop((32, i * 32, 64, i * 32 + 32))
         bb = cell.getchannel("A").getbbox()
         h = (bb[3] - bb[1]) if bb else 0
@@ -95,6 +124,31 @@ def check(texture: Path) -> list[str]:
     return fails
 
 
+def _readable(p: Path) -> bool:
+    try:
+        Image.open(p).load()
+        return True
+    except Exception:
+        return False
+
+
+def diagnostics(im: Image.Image) -> str:
+    """Per-cell width and ink, plus the consistency numbers that matter."""
+    lines = []
+    for i, d in enumerate(ORDER):
+        ws, inks, hs = [], [], []
+        for c in range(3):
+            cell = im.crop((c * 32, i * 32, (c + 1) * 32, (i + 1) * 32))
+            bb = cell.getchannel("A").getbbox()
+            ws.append((bb[2] - bb[0]) if bb else 0)
+            hs.append((bb[3] - bb[1]) if bb else 0)
+            inks.append(sum(1 for p in cell.getdata() if p[3] >= 128))
+        swing = (100.0 * (max(inks) - min(inks)) / (sum(inks) / 3)) if sum(inks) else 0.0
+        lines.append(f"     {d:5s} widths {ws}  heights {hs}  ink {inks}  "
+                     f"width-range {max(ws) - min(ws)}  ink-swing {swing:.1f}%")
+    return "\n".join(lines)
+
+
 def main(argv: list[str]) -> int:
     if not argv:
         print(__doc__)
@@ -107,7 +161,13 @@ def main(argv: list[str]) -> int:
             ok = False
             continue
         if not is_texture(p):
-            print(f"SKIP {p} (not a 96x128 woka texture — previews are checked via their texture)")
+            if is_preview(p):
+                print(f"SKIP {p} (preview — verified through its texture)")
+                continue
+            # a file that is meant to be a texture but is not 96x128 must fail
+            size = Image.open(p).size if _readable(p) else "unreadable"
+            print(f"FAIL {p}: size is {size}, must be (96, 128)")
+            ok = False
             continue
         fails = check(p)
         if fails:
@@ -117,15 +177,13 @@ def main(argv: list[str]) -> int:
                 print(f"     - {f}")
         else:
             im = Image.open(p).convert("RGBA")
-            heights = []
+            heights, widths = [], []
             for i in range(4):
                 bb = im.crop((32, i * 32, 64, i * 32 + 32)).getchannel("A").getbbox()
-                heights.append(bb[3] - bb[1] if bb else 0)
-            widths = []
-            for i in range(4):
-                bb = im.crop((32, i * 32, 64, i * 32 + 32)).getchannel("A").getbbox()
+                heights.append((bb[3] - bb[1]) if bb else 0)
                 widths.append((bb[2] - bb[0]) if bb else 0)
             print(f"PASS {p}  heights={heights}  widths={widths}")
+            print(diagnostics(im))
     print("ALL PASS" if ok else "FAILURES — see above")
     return 0 if ok else 1
 
