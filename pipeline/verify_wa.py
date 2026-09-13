@@ -30,6 +30,7 @@ from PIL import Image, ImageSequence
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+CELL = 32
 ORDER = ["down", "left", "right", "up"]
 WALK_SEQ = [0, 1, 2, 1]
 MIN_HEIGHT = 30          # the game's own wokas are 31-32
@@ -39,6 +40,14 @@ MAX_COLORS = 32
 # Files that live beside a texture but are not textures themselves. Anything else
 # that exists but is not 96x128 is a failure, not something to skip over.
 PREVIEW_NAME_HINTS = ("_sheet_8x", "idle_", "_cut", "sheet")
+
+
+def stats(im: Image.Image, row: int, col: int) -> tuple[int, int, int]:
+    """Width, height and ink of one cell — the same measure everywhere it is asked for."""
+    cell = im.crop((col * CELL, row * CELL, (col + 1) * CELL, (row + 1) * CELL))
+    bb = cell.getchannel("A").getbbox()
+    w, h = (bb[2] - bb[0], bb[3] - bb[1]) if bb else (0, 0)
+    return w, h, sum(1 for p in cell.getdata() if p[3] >= 128)
 
 
 def is_texture(p: Path) -> bool:
@@ -83,16 +92,13 @@ def check(texture: Path) -> list[str]:
 
     for i, d in enumerate(ORDER):
         for c in range(3):
-            cell = im.crop((c * 32, i * 32, (c + 1) * 32, (i + 1) * 32))
-            ink = sum(1 for p in cell.getdata() if p[3] >= 128)
+            _, _, ink = stats(im, i, c)
             if ink < MIN_CELL_INK:
                 fails.append(f"row {i} ({d}) column {c} is empty ({ink} pixels) — "
                              f"all twelve cells must hold a frame")
 
         # the standing cell is column 1 and must fill the cell like the game's own
-        cell = im.crop((32, i * 32, 64, i * 32 + 32))
-        bb = cell.getchannel("A").getbbox()
-        h = (bb[3] - bb[1]) if bb else 0
+        _, h, _ = stats(im, i, 1)
         if h < MIN_HEIGHT:
             fails.append(f"row {i} ({d}) character is {h}px tall "
                          f"(min {MIN_HEIGHT} — it will look tiny in game)")
@@ -100,7 +106,7 @@ def check(texture: Path) -> list[str]:
         gif = texture.parent / f"walk_{d}.gif"
         if gif.exists():
             got = [f.convert("RGBA") for f in ImageSequence.Iterator(Image.open(gif))]
-            exp = [im.crop((c * 32, i * 32, (c + 1) * 32, (i + 1) * 32)) for c in WALK_SEQ]
+            exp = [im.crop((c * CELL, i * CELL, (c + 1) * CELL, (i + 1) * CELL)) for c in WALK_SEQ]
             # previews are upscaled; compare at the preview's scale
             if got and got[0].size != exp[0].size:
                 exp = [e.resize(got[0].size, Image.NEAREST) for e in exp]
@@ -116,7 +122,7 @@ def check(texture: Path) -> list[str]:
         still = texture.parent / f"idle_{d}.png"
         if still.exists():
             s = Image.open(still).convert("RGBA")
-            exp = im.crop((32, i * 32, 64, i * 32 + 32))
+            exp = im.crop((CELL, i * CELL, 2 * CELL, (i + 1) * CELL))
             exp = exp.resize(s.size, Image.NEAREST)
             if any(pa != pb for pa, pb in zip(s.getdata(), exp.getdata())
                    if pa[3] >= 128 or pb[3] >= 128):
@@ -138,11 +144,10 @@ def diagnostics(im: Image.Image) -> str:
     for i, d in enumerate(ORDER):
         ws, inks, hs = [], [], []
         for c in range(3):
-            cell = im.crop((c * 32, i * 32, (c + 1) * 32, (i + 1) * 32))
-            bb = cell.getchannel("A").getbbox()
-            ws.append((bb[2] - bb[0]) if bb else 0)
-            hs.append((bb[3] - bb[1]) if bb else 0)
-            inks.append(sum(1 for p in cell.getdata() if p[3] >= 128))
+            w, h, ink = stats(im, i, c)
+            ws.append(w)
+            hs.append(h)
+            inks.append(ink)
         swing = (100.0 * (max(inks) - min(inks)) / (sum(inks) / 3)) if sum(inks) else 0.0
         lines.append(f"     {d:5s} widths {ws}  heights {hs}  ink {inks}  "
                      f"width-range {max(ws) - min(ws)}  ink-swing {swing:.1f}%")
@@ -179,9 +184,9 @@ def main(argv: list[str]) -> int:
             im = Image.open(p).convert("RGBA")
             heights, widths = [], []
             for i in range(4):
-                bb = im.crop((32, i * 32, 64, i * 32 + 32)).getchannel("A").getbbox()
-                heights.append((bb[3] - bb[1]) if bb else 0)
-                widths.append((bb[2] - bb[0]) if bb else 0)
+                w, h, _ = stats(im, i, 1)
+                heights.append(h)
+                widths.append(w)
             print(f"PASS {p}  heights={heights}  widths={widths}")
             print(diagnostics(im))
     print("ALL PASS" if ok else "FAILURES — see above")
