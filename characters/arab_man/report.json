@@ -1,0 +1,85 @@
+{
+  "name": "arab_man",
+  "measures": {
+    "down": {
+      "widths": [
+        21,
+        21,
+        21
+      ],
+      "heights": [
+        32,
+        31,
+        32
+      ],
+      "ink": [
+        457,
+        482,
+        465
+      ]
+    },
+    "left": {
+      "widths": [
+        20,
+        20,
+        19
+      ],
+      "heights": [
+        32,
+        32,
+        32
+      ],
+      "ink": [
+        470,
+        438,
+        457
+      ]
+    },
+    "right": {
+      "widths": [
+        21,
+        20,
+        20
+      ],
+      "heights": [
+        32,
+        32,
+        32
+      ],
+      "ink": [
+        484,
+        421,
+        466
+      ]
+    },
+    "up": {
+      "widths": [
+        21,
+        21,
+        21
+      ],
+      "heights": [
+        31,
+        31,
+        31
+      ],
+      "ink": [
+        473,
+        488,
+        476
+      ]
+    },
+    "colours": 32,
+    "semi_transparent": 0,
+    "size": [
+      96,
+      128
+    ]
+  },
+  "gifs": [
+    "walk_down.gif",
+    "walk_left.gif",
+    "walk_right.gif",
+    "walk_up.gif"
+  ]
+}

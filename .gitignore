@@ -3,6 +3,7 @@ runs/
 *.sg-rwlock
 *_32/
 run*/
+*_cut.png          # matted intermediate: reproducible from sheet.png + the key
 
 # python
 __pycache__/

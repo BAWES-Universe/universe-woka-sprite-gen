@@ -43,9 +43,35 @@ python3 -m venv .venv && ./.venv/bin/pip install -e .
 codex login                     # the image backend; see docs/tools-and-versions.md
 
 # 2. make a base still, get it approved (this is the quality gate — see docs/making-the-base.md)
-# 3. run the pipeline
 cd ../universe-woka-sprite-gen
 export SPRITE_GEN_BIN=../sprite-gen/.venv/bin/sprite-gen
+```
+
+### Recommended: one sheet, twelve frames (docs/one-sheet-workflow.md)
+
+```bash
+mkdir -p characters/my_character
+# prompt.txt: the 4x3 sheet prompt (copy characters/arab_man/prompt.txt as a starting point)
+cp <approved still> characters/my_character/base.png
+
+sprite-gen gen --provider codex --ref characters/my_character/base.png \
+  --prompt-file characters/my_character/prompt.txt \
+  --out characters/my_character/sheet.png
+
+python3 pipeline/make_woka.py --sheet characters/my_character/sheet.png --name my_character
+python3 pipeline/verify_wa.py characters/my_character/my_character_texture_96x128.png
+```
+
+Output: `characters/<name>/<name>_texture_96x128.png` (shippable),
+`walk_{down,left,right,up}.gif`, `report.json` (measurements), `index.html` (review page).
+
+One generation writes all twelve poses together, so proportions cannot drift between
+rows; a single shared scale then places them, so no frame can fatten or shrink.
+This is the fastest route per character and the one to use by default.
+
+### Alternative: per-row generation (docs/how-to-make-a-woka.md)
+
+```bash
 ./pipeline/character_pipeline.sh characters/my_character
 ```
 
@@ -57,7 +83,8 @@ Verify before you push:
 
 ```bash
 bash tests/selftest.sh                       # pipeline self-test, no credentials needed
-python3 pipeline/verify_wa.py characters/*/out/*.png
+bash tests/test_sheet_pipeline.sh            # one-sheet pipeline self-test
+python3 pipeline/verify_wa.py characters/*/out/*.png characters/*/*_texture_96x128.png
 ```
 
 ---
