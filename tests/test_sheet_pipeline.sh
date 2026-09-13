@@ -19,7 +19,7 @@ python3 - "$TMP/sheet.png" <<'PY'
 import sys
 from PIL import Image, ImageDraw
 W = H = 64
-sheet = Image.new("RGB", (W * 3, H * 4), (255, 0, 255))
+sheet = Image.new("RGBA", (W * 3, H * 4), (0, 0, 0, 0))   # alpha: no external tool needed
 d = ImageDraw.Draw(sheet)
 for r in range(4):
     for c in range(3):
@@ -38,7 +38,7 @@ PY
 
 say "2. run the pipeline"
 if python3 "$REPO/pipeline/make_woka.py" --sheet "$TMP/sheet.png" --name selftest \
-        --key magenta --out-dir "$TMP/out" >"$TMP/run.log" 2>&1; then
+        --key none --out-dir "$TMP/out" >"$TMP/run.log" 2>&1; then
   ok "make_woka.py exited 0"
 else
   bad "make_woka.py failed"; sed 's/^/      /' "$TMP/run.log"

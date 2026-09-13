@@ -60,10 +60,16 @@ def matt(sheet: Path, key: str, work: Path) -> Image.Image:
     if key == "none":
         return Image.open(sheet).convert("RGBA")
     out = work / (sheet.stem + "_cut.png")
-    r = subprocess.run([sprite_gen_bin(), "cutout", str(sheet), "--out", str(out), "--key", key],
-                       capture_output=True, text=True)
+    try:
+        r = subprocess.run([sprite_gen_bin(), "cutout", str(sheet), "--out", str(out), "--key", key],
+                           capture_output=True, text=True)
+        code = r.returncode
+    except (FileNotFoundError, OSError) as exc:          # no sprite-gen on this machine (CI)
+        code = -1
+        print(f"warning: sprite-gen not runnable ({exc.__class__.__name__}); using the sheet as-is."
+              " A sheet that already carries alpha needs --key none.", file=sys.stderr)
     if not out.exists():
-        print(f"warning: cutout unavailable ({r.returncode}); using the sheet as-is",
+        print(f"warning: cutout produced nothing (exit {code}); using the sheet as-is",
               file=sys.stderr)
         return Image.open(sheet).convert("RGBA")
     return Image.open(out).convert("RGBA")
