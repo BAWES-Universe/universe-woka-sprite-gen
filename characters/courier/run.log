@@ -1,0 +1,60 @@
+/home/bawes/sprite-gen/.venv/bin/sprite-gen gen --provider codex --prompt-file /home/bawes/universe-woka-sprite-gen/characters/courier/base_prompt.txt --out /home/bawes/universe-woka-sprite-gen/characters/courier/base.png
+to toe. Flat solid magenta #FF00FF background,\nno shadow, no text, no border.",
+  "out": "/home/bawes/universe-woka-sprite-gen/characters/courier/base.png",
+  "raw": "/home/bawes/universe-woka-sprite-gen/characters/courier/base.png.raw.png",
+  "raw_bytes": 1400747,
+  "elapsed_seconds": 37.719,
+  "model": null,
+  "session_id": "01a09ac0-65ca-73d0-ba53-4d35c3bc7de4",
+  "refs": [],
+  "transparent": false,
+  "alpha": null,
+  "chroma": null,
+  "extra": {
+    "inline_results": 1,
+    "rollout_cleaned": true,
+    "transparent_background_reported": false
+  },
+  "provider_resolved_from": "explicit"
+}
+
+/home/bawes/sprite-gen/.venv/bin/sprite-gen gen --provider codex --ref /home/bawes/universe-woka-sprite-gen/characters/courier/base.png --prompt-file /home/bawes/universe-woka-sprite-gen/characters/courier/prompt.txt --out /home/bawes/universe-woka-sprite-gen/characters/courier/sheet.png
+t.",
+  "out": "/home/bawes/universe-woka-sprite-gen/characters/courier/sheet.png",
+  "raw": "/home/bawes/universe-woka-sprite-gen/characters/courier/sheet.png.raw.png",
+  "raw_bytes": 1427653,
+  "elapsed_seconds": 88.905,
+  "model": null,
+  "session_id": "01a09ac0-f9d0-76d0-8420-33e54c27c8e0",
+  "refs": [
+    "/home/bawes/universe-woka-sprite-gen/characters/courier/base.png"
+  ],
+  "transparent": false,
+  "alpha": null,
+  "chroma": null,
+  "extra": {
+    "inline_results": 1,
+    "rollout_cleaned": true,
+    "transparent_background_reported": false
+  },
+  "provider_resolved_from": "explicit"
+}
+
+/usr/bin/python3 /home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py --sheet /home/bawes/universe-woka-sprite-gen/characters/courier/sheet.png --name courier
+courier: 1254x1254 sheet -> 96x128 texture, 32 colours, 0 semi-transparent px
+   down   widths [14, 12, 15]  heights [30, 31, 30]  ink [215, 244, 216]
+   left   widths [19, 8, 19]  heights [32, 32, 32]  ink [214, 151, 221]
+   right  widths [20, 8, 19]  heights [32, 32, 32]  ink [233, 160, 216]
+   up     widths [14, 12, 14]  heights [28, 28, 28]  ink [213, 220, 204]
+   wrote characters/courier/index.html, report.json, 4 walk gifs
+ta instead.
+  inks.append(sum(1 for p in cell.getdata() if p[3] >= 128))
+/home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py:128: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  opaque = [p[:3] for p in tex.getdata() if p[3] >= 128]
+/home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py:130: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out["semi_transparent"] = sum(1 for p in tex.getdata() if 0 < p[3] < 255)
+
+/usr/bin/python3 /home/bawes/universe-woka-sprite-gen/pipeline/verify_wa.py /home/bawes/universe-woka-sprite-gen/characters/courier/courier_texture_96x128.png
+FAIL /home/bawes/universe-woka-sprite-gen/characters/courier/courier_texture_96x128.png: not found
+FAILURES — see above
+

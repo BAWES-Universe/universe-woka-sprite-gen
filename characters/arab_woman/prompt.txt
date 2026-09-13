@@ -1,0 +1,17 @@
+Create a sprite sheet with exactly twelve evenly sized cells, arranged in 4 rows and 3 columns, on a 1024 by 1024 canvas.
+
+Use the attached character as the identity and costume reference: a young Arab woman: a cream hijab draped over her head and shoulders, olive skin, large dark eyes, a long navy abaya with gold trim at the cuffs, brown sandals.
+
+Row 1: walking toward the viewer, front view.
+Row 2: walking to the left in side profile.
+Row 3: walking to the right in side profile.
+Row 4: walking away from the viewer, back view, no visible face.
+
+In every row the three cells are three phases of one walk cycle with an EXAGGERATED stride: arms clearly swinging, one foot visibly lifted off the ground, the body clearly changing pose between the frames. The MIDDLE cell must be the neutral standing pose with both feet together on the ground.
+Consistent character scale and the same ground baseline in every cell, full body with generous margins.
+
+The face must be clean and readable: two dark eyes each with a white highlight pixel, dark eyebrows, a small nose and a small mouth.
+
+Bold colour blocking, flat clean colours, bold dark outlines, strong contrast between the materials. Avoid fine micro-detail that would blur at small size.
+
+Every cell background is flat solid magenta #FF00FF, edge to edge, behind the character only. No grid lines, no floor, no drop shadows, no frame numbers, no labels, no text.

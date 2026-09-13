@@ -91,11 +91,15 @@ def slice_sheet(sheet: Image.Image):
 
 
 def compose(grid, colours: int) -> Image.Image:
-    """ONE shared scale for all twelve cells, then paste on the cell baselines."""
-    tallest = max(f.height for row in grid for f in row)
-    scale = CELL / tallest
+    """ONE scale per ROW: frames inside a row must match each other, rows may differ.
+
+    Scaling per frame is what made frames fatten and shrink; scaling all twelve
+    together makes a row whose figures were drawn smaller (usually the back view)
+    come out under-filling the cell. One scale per row gives both properties.
+    """
     tex = Image.new("RGBA", (COLS * CELL, ROWS * CELL), (0, 0, 0, 0))
     for r, row in enumerate(grid):
+        scale = CELL / max(f.height for f in row)
         for c, fig in enumerate(row):
             w = max(1, round(fig.width * scale))
             h = max(1, round(fig.height * scale))

@@ -4,6 +4,7 @@ runs/
 *_32/
 run*/
 *_cut.png          # matted intermediate: reproducible from sheet.png + the key
+sheet.png          # the raw generation intermediate; the texture + base + prompt are the record
 
 # python
 __pycache__/

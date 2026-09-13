@@ -1,0 +1,60 @@
+/home/bawes/sprite-gen/.venv/bin/sprite-gen gen --provider codex --prompt-file /home/bawes/universe-woka-sprite-gen/characters/knight/base_prompt.txt --out /home/bawes/universe-woka-sprite-gen/characters/knight/base.png
+d to toe. Flat solid magenta #FF00FF background,\nno shadow, no text, no border.",
+  "out": "/home/bawes/universe-woka-sprite-gen/characters/knight/base.png",
+  "raw": "/home/bawes/universe-woka-sprite-gen/characters/knight/base.png.raw.png",
+  "raw_bytes": 1630363,
+  "elapsed_seconds": 52.014,
+  "model": null,
+  "session_id": "01a09abc-72a3-7e12-a12f-a0811d52b05c",
+  "refs": [],
+  "transparent": false,
+  "alpha": null,
+  "chroma": null,
+  "extra": {
+    "inline_results": 1,
+    "rollout_cleaned": true,
+    "transparent_background_reported": false
+  },
+  "provider_resolved_from": "explicit"
+}
+
+/home/bawes/sprite-gen/.venv/bin/sprite-gen gen --provider codex --ref /home/bawes/universe-woka-sprite-gen/characters/knight/base.png --prompt-file /home/bawes/universe-woka-sprite-gen/characters/knight/prompt.txt --out /home/bawes/universe-woka-sprite-gen/characters/knight/sheet.png
+ text.",
+  "out": "/home/bawes/universe-woka-sprite-gen/characters/knight/sheet.png",
+  "raw": "/home/bawes/universe-woka-sprite-gen/characters/knight/sheet.png.raw.png",
+  "raw_bytes": 1704368,
+  "elapsed_seconds": 86.03,
+  "model": null,
+  "session_id": "01a09abd-391d-7250-b608-ebd0d55e19c8",
+  "refs": [
+    "/home/bawes/universe-woka-sprite-gen/characters/knight/base.png"
+  ],
+  "transparent": false,
+  "alpha": null,
+  "chroma": null,
+  "extra": {
+    "inline_results": 1,
+    "rollout_cleaned": true,
+    "transparent_background_reported": false
+  },
+  "provider_resolved_from": "explicit"
+}
+
+/usr/bin/python3 /home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py --sheet /home/bawes/universe-woka-sprite-gen/characters/knight/sheet.png --name knight
+knight: 1254x1254 sheet -> 96x128 texture, 31 colours, 0 semi-transparent px
+   down   widths [18, 16, 17]  heights [31, 31, 31]  ink [314, 315, 298]
+   left   widths [22, 12, 22]  heights [32, 32, 32]  ink [266, 213, 267]
+   right  widths [23, 10, 23]  heights [31, 31, 32]  ink [269, 177, 262]
+   up     widths [17, 15, 17]  heights [30, 30, 31]  ink [279, 299, 288]
+   wrote characters/knight/index.html, report.json, 4 walk gifs
+ta instead.
+  inks.append(sum(1 for p in cell.getdata() if p[3] >= 128))
+/home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py:128: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  opaque = [p[:3] for p in tex.getdata() if p[3] >= 128]
+/home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py:130: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out["semi_transparent"] = sum(1 for p in tex.getdata() if 0 < p[3] < 255)
+
+/usr/bin/python3 /home/bawes/universe-woka-sprite-gen/pipeline/verify_wa.py /home/bawes/universe-woka-sprite-gen/characters/knight/knight_texture_96x128.png
+FAIL /home/bawes/universe-woka-sprite-gen/characters/knight/knight_texture_96x128.png: not found
+FAILURES — see above
+

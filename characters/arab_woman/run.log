@@ -1,0 +1,59 @@
+/home/bawes/sprite-gen/.venv/bin/sprite-gen gen --provider codex --prompt-file /home/bawes/universe-woka-sprite-gen/characters/arab_woman/base_prompt.txt --out /home/bawes/universe-woka-sprite-gen/characters/arab_woman/base.png
+. Flat solid magenta #FF00FF background,\nno shadow, no text, no border.",
+  "out": "/home/bawes/universe-woka-sprite-gen/characters/arab_woman/base.png",
+  "raw": "/home/bawes/universe-woka-sprite-gen/characters/arab_woman/base.png.raw.png",
+  "raw_bytes": 1328215,
+  "elapsed_seconds": 38.169,
+  "model": null,
+  "session_id": "01a09abe-8ec1-7c43-ad19-ab4ec699b0bb",
+  "refs": [],
+  "transparent": false,
+  "alpha": null,
+  "chroma": null,
+  "extra": {
+    "inline_results": 1,
+    "rollout_cleaned": true,
+    "transparent_background_reported": false
+  },
+  "provider_resolved_from": "explicit"
+}
+
+/home/bawes/sprite-gen/.venv/bin/sprite-gen gen --provider codex --ref /home/bawes/universe-woka-sprite-gen/characters/arab_woman/base.png --prompt-file /home/bawes/universe-woka-sprite-gen/characters/arab_woman/prompt.txt --out /home/bawes/universe-woka-sprite-gen/characters/arab_woman/sheet.png
+ut": "/home/bawes/universe-woka-sprite-gen/characters/arab_woman/sheet.png",
+  "raw": "/home/bawes/universe-woka-sprite-gen/characters/arab_woman/sheet.png.raw.png",
+  "raw_bytes": 1416050,
+  "elapsed_seconds": 81.076,
+  "model": null,
+  "session_id": "01a09abf-2442-7f80-afbb-2a52d8b81150",
+  "refs": [
+    "/home/bawes/universe-woka-sprite-gen/characters/arab_woman/base.png"
+  ],
+  "transparent": false,
+  "alpha": null,
+  "chroma": null,
+  "extra": {
+    "inline_results": 1,
+    "rollout_cleaned": true,
+    "transparent_background_reported": false
+  },
+  "provider_resolved_from": "explicit"
+}
+
+/usr/bin/python3 /home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py --sheet /home/bawes/universe-woka-sprite-gen/characters/arab_woman/sheet.png --name arab_woman
+arab_woman: 1254x1254 sheet -> 96x128 texture, 32 colours, 0 semi-transparent px
+   down   widths [15, 13, 14]  heights [31, 31, 31]  ink [272, 269, 256]
+   left   widths [20, 10, 20]  heights [31, 31, 31]  ink [294, 214, 301]
+   right  widths [21, 10, 21]  heights [32, 32, 32]  ink [319, 223, 308]
+   up     widths [15, 13, 15]  heights [30, 30, 30]  ink [264, 275, 274]
+   wrote characters/arab_woman/index.html, report.json, 4 walk gifs
+ta instead.
+  inks.append(sum(1 for p in cell.getdata() if p[3] >= 128))
+/home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py:128: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  opaque = [p[:3] for p in tex.getdata() if p[3] >= 128]
+/home/bawes/universe-woka-sprite-gen/pipeline/make_woka.py:130: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out["semi_transparent"] = sum(1 for p in tex.getdata() if 0 < p[3] < 255)
+
+/usr/bin/python3 /home/bawes/universe-woka-sprite-gen/pipeline/verify_wa.py /home/bawes/universe-woka-sprite-gen/characters/arab_woman/arab_woman_texture_96x128.png
+FAIL /home/bawes/universe-woka-sprite-gen/characters/arab_woman/arab_woman_texture_96x128.png: not found
+FAILURES — see above
+

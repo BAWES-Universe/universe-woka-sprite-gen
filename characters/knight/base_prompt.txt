@@ -1,0 +1,4 @@
+Full body front view of a young knight: polished silver plate armour with gold trim, a deep blue tabard bearing a gold starburst, a red plume on an open helm, brown leather belt and boots, short brown hair, calm expression, standing still and facing the viewer. Drawn as clean
+game sprite art: bold dark outlines, flat colours, a limited palette, chunky readable shapes,
+one character centred and complete from head to toe. Flat solid magenta #FF00FF background,
+no shadow, no text, no border.
